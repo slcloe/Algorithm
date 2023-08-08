@@ -3,37 +3,26 @@ import java.io.InputStreamReader;
 import java.util.StringTokenizer;
 
 public class Solution {
-
-
     static char[] tree;
     static StringBuilder sb = new StringBuilder();
-
     static int N;
     static boolean middleOrder(int idx){
-        boolean left = true;
-        boolean right = true;
-        boolean left1 = true;
-        boolean right1 = true;
+        boolean tf[] = {true, true, true, true};
 
         if (idx * 2 <= N){
-            left = middleOrder(idx * 2);
-            left1 = isNumber(idx * 2);
+            tf[0] = middleOrder(idx * 2);
+            tf[1] = isNumber(idx * 2);
         }
         else return true;
         if (idx * 2 + 1 <= N)
         {
-            right = middleOrder(idx * 2 + 1);
-            right1 = isNumber(idx * 2 + 1);
+            tf[2] = middleOrder(idx * 2 + 1);
+            tf[3] = isNumber(idx * 2 + 1);
         }
 
-        if (left == false || right == false) {
-            return false;
+        for(boolean tmp : tf){
+            if (!tmp) return false;
         }
-
-        if (left1 == false || right1 == false) {
-            return false;
-        }
-
         tree[idx] = '0';
         return true;
     }
@@ -62,8 +51,5 @@ public class Solution {
             sb.append("#").append(tc).append(" ").append(result).append("\n");
         }
         System.out.println(sb.toString());
-
-
-
     }
 }
