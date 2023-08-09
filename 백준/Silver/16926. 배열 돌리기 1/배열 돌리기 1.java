@@ -33,8 +33,8 @@ public class Main {
                 ty = ty + dy[i + 1];
             }
         }
-
-        for (int i = 0; i < r; i++) {
+        int rot = r % queue.size();
+        for (int i = 0; i < rot; i++) {
             int tmp = queue.pollLast();
             queue.offerFirst(tmp);
         }
@@ -82,3 +82,13 @@ public class Main {
         System.out.println(sb.toString());
     }
 }
+/*
+5 4 14
+1 2 3 4
+7 8 9 10
+13 14 15 16
+19 20 21 22
+25 26 27 28
+
+
+ */
