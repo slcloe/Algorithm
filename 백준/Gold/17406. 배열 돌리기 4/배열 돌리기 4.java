@@ -7,9 +7,7 @@ public class Main {
     static int[][] arr1;
     static int[] b;
     static int[][] rot;
-    static StringBuilder sb = new StringBuilder();
     static ArrayDeque<Integer> queue;
-
     static int finalResult = -1;
     static boolean[] v;
 
@@ -21,18 +19,10 @@ public class Main {
 
     static void comb(int cnt){
         if (cnt == R){
-//            System.out.println("b : " + Arrays.toString(b));
             copy();
             for (int i = 0; i < R; i++) {
                 rotate(rot[b[i]]);
             }
-//            for(int[] arr1 : arr){
-//                for(int arr2: arr1){
-//                    sb.append(arr2).append(" ");
-//                }
-//                sb.append("\n");
-//            }
-//            sb.append("\n");
             int tmp = calArr();
             if (finalResult == -1) finalResult = tmp;
             finalResult = (finalResult < tmp) ? finalResult : tmp;
@@ -135,6 +125,5 @@ public class Main {
         comb(0);
 
         System.out.println(finalResult);
-//        System.out.println(sb.toString());
     }
 }
