@@ -39,8 +39,6 @@ public class Main {
                 if (dist[kLastIdx] == distance) kLastIdx--;
                 else if (dist[kFirstIdx] == distance) kFirstIdx++;
                 start = end = i;
-                partition++;
-                if (partition == K - 1)break;
             }
             else{
                 end++;
