@@ -5,7 +5,6 @@ public class Main {
 
     static int N;
     static int[][] arr;
-    static boolean[][] v;
 
     static int[] dx = {0, 1, 1};
     static int[] dy = {1, 0, 1};
@@ -27,24 +26,11 @@ public class Main {
             int tx = x + dx[direct[d][i]];
             int ty = y + dy[direct[d][i]];
             if (tx < 0 || tx >= N || ty < 0 || ty >= N) continue;
-//            if (v[tx][ty]) continue;
             if (arr[tx][ty] == 1) continue;
             if (direct[d][i] == 2){
-                if (v[tx - 1][ty] || v[tx][ty - 1]) continue;
                 if (arr[tx - 1][ty] == 1 || arr[tx][ty - 1] == 1) continue;
-//                v[tx - 1][ty] = true;
-//                v[tx][ty] = true;
-//                v[tx][ty - 1] = true;
-                dfs(tx, ty, direct[d][i]);
-//                v[tx - 1][ty] = false;
-//                v[tx][ty - 1] = false;
-//                v[tx][ty] = false;
             }
-            else {
-//                v[tx][ty] = true;
-                dfs(tx, ty, direct[d][i]);
-//                v[tx][ty] = false;
-            }
+            dfs(tx, ty, direct[d][i]);
         }
     }
 
@@ -54,7 +40,6 @@ public class Main {
 
         N = Integer.parseInt(br.readLine());
         arr = new int[N][N];
-        v = new boolean[N][N];
         for (int i = 0; i < N; i++) {
             st = new StringTokenizer(br.readLine(), " ");
             for (int j = 0; j < N; j++) {
