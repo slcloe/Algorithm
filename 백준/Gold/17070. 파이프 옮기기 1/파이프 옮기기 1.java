@@ -20,11 +20,6 @@ public class Main {
     static void dfs(int x, int y, int d)
     {
         if (x == N - 1 && y == N - 1){
-//            for(boolean[] arr1 : v){
-//                System.out.println(Arrays.toString(arr1));
-//            }
-//            System.out.println();
-
             result++; return;
         }
 
@@ -32,23 +27,23 @@ public class Main {
             int tx = x + dx[direct[d][i]];
             int ty = y + dy[direct[d][i]];
             if (tx < 0 || tx >= N || ty < 0 || ty >= N) continue;
-            if (v[tx][ty]) continue;
+//            if (v[tx][ty]) continue;
             if (arr[tx][ty] == 1) continue;
             if (direct[d][i] == 2){
                 if (v[tx - 1][ty] || v[tx][ty - 1]) continue;
                 if (arr[tx - 1][ty] == 1 || arr[tx][ty - 1] == 1) continue;
-                v[tx - 1][ty] = true;
-                v[tx][ty] = true;
-                v[tx][ty - 1] = true;
+//                v[tx - 1][ty] = true;
+//                v[tx][ty] = true;
+//                v[tx][ty - 1] = true;
                 dfs(tx, ty, direct[d][i]);
-                v[tx - 1][ty] = false;
-                v[tx][ty - 1] = false;
-                v[tx][ty] = false;
+//                v[tx - 1][ty] = false;
+//                v[tx][ty - 1] = false;
+//                v[tx][ty] = false;
             }
             else {
-                v[tx][ty] = true;
+//                v[tx][ty] = true;
                 dfs(tx, ty, direct[d][i]);
-                v[tx][ty] = false;
+//                v[tx][ty] = false;
             }
         }
     }
