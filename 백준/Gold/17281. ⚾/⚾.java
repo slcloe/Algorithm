@@ -28,13 +28,12 @@ public class Main {
 
     static int calBaseBall(){
         int score = 0;
-        int[] basement;
+        int[] basement = new int[3];
         int player = 0;
 
-//        System.out.println(Arrays.toString(b));
         for (int i = 0; i < N; i++) {
             int out = 0;
-            basement = new int[3];
+            Arrays.fill(basement, 0);
 
             while(true){
                 int ability = arr[i][b[player]];
@@ -58,7 +57,6 @@ public class Main {
                 player = (player + 1) % 9;
                 if (out == 3) break;
             }
-//            System.out.println(score);
         }
         return score;
     }
