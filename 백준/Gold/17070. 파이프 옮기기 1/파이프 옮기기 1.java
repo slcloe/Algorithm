@@ -9,6 +9,7 @@ public class Main {
     static int[] dx = {0, 1, 1};
     static int[] dy = {1, 0, 1};
 
+    // 방향별 갈 수 있는 방향 idx 정의
     static int[][] direct = {
             {0, 2},
             {1, 2},
@@ -16,8 +17,9 @@ public class Main {
     };
     static int result;
 
-    static void dfs(int x, int y, int d)
+    static void dfs(int x, int y, int d) // 현재 pos (x, y) 방향 d ( 0 = 가로 , 1 = 세로, 2 = 대각 )
     {
+        // 목적지에 도달했을 경우 return
         if (x == N - 1 && y == N - 1){
             result++; return;
         }
@@ -27,8 +29,8 @@ public class Main {
             int ty = y + dy[direct[d][i]];
             if (tx < 0 || tx >= N || ty < 0 || ty >= N) continue;
             if (arr[tx][ty] == 1) continue;
-            if (direct[d][i] == 2){
-                if (arr[tx - 1][ty] == 1 || arr[tx][ty - 1] == 1) continue;
+            if (direct[d][i] == 2){ // 가려고 하는 방향이 대각선일 경우
+                if (arr[tx - 1][ty] == 1 || arr[tx][ty - 1] == 1) continue; // 가로 & 세로 방향도 갈 수 있는지 체크해야함.
             }
             dfs(tx, ty, direct[d][i]);
         }
