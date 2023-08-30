@@ -12,25 +12,7 @@ public class Main {
     static boolean isRange(int x, int y){
         return x >= 0 && x < R && y >= 0 && y < C;
     }
-
-    static void dfs(int x, int y){
-
-        for (int i = 0; i < dx.length; i++) {
-            int tx = x - dx[i];
-            int ty = y - dy[i];
-            if (!isRange(tx, ty)) continue;
-            int tmp = arr[x][y] + dp[tx][ty];
-            dp[x][y] = (dp[x][y] < tmp) ? tmp : dp[x][y];
-        }
-
-        for (int i = 0; i < dx.length; i++) {
-            int tx = x + dx[i];
-            int ty = y + dy[i];
-            if (!isRange(tx, ty)) continue;
-            dfs(tx, ty);
-        }
-    }
-
+    
     public static void main(String[] args) throws Exception{
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         StringTokenizer st = new StringTokenizer(br.readLine(),  " ");
