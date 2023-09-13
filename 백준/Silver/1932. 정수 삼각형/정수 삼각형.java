@@ -33,9 +33,9 @@ public class Main {
 //        for (int[] arr: dp){
 //            System.out.println(Arrays.toString(arr));
 //        }
-        for (int j = 0;j < N;j++) {
-            if (dp[N - 1][j] > max) max = dp[N][j];
-        }
+//        for (int j = 0;j < N;j++) {
+//            max = Math.max(dp[N - 1][j], max);
+//        }
         System.out.println(max);
     }
 
