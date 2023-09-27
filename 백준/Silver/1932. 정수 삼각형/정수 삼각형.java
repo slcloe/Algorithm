@@ -26,15 +26,11 @@ public class Main {
                 int b = 0;
                 if (j - 1 >= 0) b = dp[i - 1][j - 1];
                 dp[i][j] = Math.max(a, b) + triangle[i][j];
-                if (N - 1 == i)
-                    max = Math.max(dp[i][j], max);
+                max = Math.max(dp[i][j], max);
             }
         }
 //        for (int[] arr: dp){
 //            System.out.println(Arrays.toString(arr));
-//        }
-//        for (int j = 0;j < N;j++) {
-//            max = Math.max(dp[N - 1][j], max);
 //        }
         System.out.println(max);
     }
