@@ -2,15 +2,15 @@ import java.util.*;
 import java.io.*;
 class Solution {
     
-    
-    public int solution(int[][] jobs) {
+    public static int solution(int[][] jobs) {
         int answer = 0;
+
+//        ArrayList<int[]> list = new ArrayList<>(Arrays.stream(jobs).toList());
 
         ArrayList<int[]> list = new ArrayList<>();
         for (int i = 0; i < jobs.length; i++) {
             list.add(new int[] {jobs[i][0], jobs[i][1]});
         }
-
         PriorityQueue<int[]> pq = new PriorityQueue<>(new Comparator<int[]>() {
             @Override
             public int compare(int[] o1, int[] o2) {
@@ -21,7 +21,7 @@ class Solution {
         int idx = 0;
         int curState = 0;
 
-        while (idx < jobs.length){
+        while (!list.isEmpty() || !pq.isEmpty()){
 
             // 현재 curState 와 비교해서 실행시킬수 있는 프로세스 넣기
             Iterator iter = list.iterator();
@@ -40,11 +40,16 @@ class Solution {
                 answer += curState + cur[1] - cur[0];
                 curState = curState + cur[1];
                 idx++;
-
             }
             // 현재 진행할 수 있는 프로세스가 없다면 -> 그냥 curState ++ 하고 돌리기
             else{
-                curState++;
+                Collections.sort(list, (o1, o2) -> {
+                    if (o1[0] == o2[0]) return Integer.compare(o1[1], o2[1]);
+                    return Integer.compare(o1[0], o2[0]);
+                });
+                pq.offer(list.get(0));
+                curState = list.get(0)[0];
+                list.remove(0);
             }
         }
 
