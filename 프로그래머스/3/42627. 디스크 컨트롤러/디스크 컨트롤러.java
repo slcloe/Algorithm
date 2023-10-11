@@ -1,14 +1,15 @@
 import java.util.*;
 import java.io.*;
-
 class Solution {
-    
     
     
     public int solution(int[][] jobs) {
         int answer = 0;
 
-        int[][] result = new int[jobs.length][2]; // start - end;
+        ArrayList<int[]> list = new ArrayList<>();
+        for (int i = 0; i < jobs.length; i++) {
+            list.add(new int[] {jobs[i][0], jobs[i][1]});
+        }
 
         PriorityQueue<int[]> pq = new PriorityQueue<>(new Comparator<int[]>() {
             @Override
@@ -19,16 +20,16 @@ class Solution {
         });
         int idx = 0;
         int curState = 0;
-        boolean v[] = new boolean[jobs.length];
 
         while (idx < jobs.length){
 
             // 현재 curState 와 비교해서 실행시킬수 있는 프로세스 넣기
-            for (int i = 0; i < jobs.length; i++) {
-                if (v[i]) continue;
-                if (curState >= jobs[i][0]) {
-                    pq.offer(jobs[i]);
-                    v[i] = true;
+            Iterator iter = list.iterator();
+            while(iter.hasNext()){
+                int cur[] = (int[]) iter.next();
+                if (curState >= cur[0]) {
+                    pq.offer(cur);
+                    iter.remove();
                 }
             }
 
@@ -36,9 +37,8 @@ class Solution {
             if (!pq.isEmpty()){
                 int cur[] = pq.poll();
 
-                result[idx][0] = cur[0];
-                result[idx][1] = curState + cur[1];
-                curState = result[idx][1];
+                answer += curState + cur[1] - cur[0];
+                curState = curState + cur[1];
                 idx++;
 
             }
@@ -48,10 +48,7 @@ class Solution {
             }
         }
 
-        for (int i = 0; i < jobs.length; i++) {
-            answer += result[i][1] - result[i][0];
-        }
-        answer /= jobs.length;
-        return answer;
+        return answer /= jobs.length;
     }
+        
 }
