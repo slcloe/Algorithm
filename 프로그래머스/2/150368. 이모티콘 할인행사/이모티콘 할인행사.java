@@ -3,8 +3,8 @@ import java.util.*;
 
 class Solution {
     int[] b;
-int userNum, maxPrice;
-void perm(int cnt, int n, int[][] users, int[] emoticons){
+    int userNum, maxPrice;
+    void perm(int cnt, int n, int[][] users, int[] emoticons){
         if (cnt == n){
             //cal
             cal(users, emoticons);
@@ -19,10 +19,10 @@ void perm(int cnt, int n, int[][] users, int[] emoticons){
      void cal(int[][] users, int[] emoticons){
         int user = 0, price = 0;
         for (int i = 0; i < users.length; i++) {
-            double totalP = 0;
+            int totalP = 0;
             for (int j = 0; j < emoticons.length; j++) {
                 if (users[i][0] > b[j]) continue;
-                double p = emoticons[j] * ((double) (100 - b[j]) / 100);
+                int p = emoticons[j] * (100 - b[j]) / 100;
                 totalP += p;
             }
             if (totalP >= users[i][1]) user++;
