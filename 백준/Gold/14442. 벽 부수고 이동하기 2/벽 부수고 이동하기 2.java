@@ -21,23 +21,23 @@ public class Main {
         while(!q.isEmpty()){
             int[] cur = q.poll();
 
-            key = cur[3];
             for (int i = 0; i < 4; i++) {
                 int tx = cur[0] + dx[i];
                 int ty = cur[1] + dy[i];
 
                 if (tx < 0 || tx >= N || ty < 0 || ty >= M) continue;
                 if (tx == N - 1 && ty == M - 1) return cur[2] + 1;
-                if (arr[tx][ty] == '1') {
-                    if ( key >= K || v[tx][ty][key + 1] ) continue;
-                        q.offer(new int[] {tx, ty, cur[2] + 1, key + 1});
-                        v[tx][ty][key + 1] = true;
+
+                key = cur[3];
+                if (arr[tx][ty] == '1' ) {
+                    if (key < K) key++;
+                    else continue;
                 }
-                else{
-                    if (v[tx][ty][key]) continue;
-                    q.offer(new int[] {tx, ty, cur[2] + 1, key});
-                    v[tx][ty][key] = true;
-                }
+                
+                if (v[tx][ty][key]) continue;
+                q.offer(new int[] {tx, ty, cur[2] + 1, key});
+                v[tx][ty][key] = true;
+
             }
         }
         return -1;
@@ -62,40 +62,3 @@ public class Main {
 
     }
 }
-
-/*
-0 1 2 3
-4 5 6 7
-8 9 10 11
-
-
-13 1 10
-0
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-0
-0
-
-13 1 10
-0
-1
-1
-1
-1
-1
-1
-1
-1
-1
-1
-0
-0
- */
