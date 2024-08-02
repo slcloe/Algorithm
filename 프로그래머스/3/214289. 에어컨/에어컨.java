@@ -32,31 +32,26 @@ class Solution {
             }
             
             for(int j = start ; j <= end ; j++) {
+                dp[i + 1][j] = Math.min(dp[i + 1][j], dp[i][j] + b); // 에어컨 가동시켜 온도 유지
                 // System.out.println(dp[i + 1][j] + " " + (dp[i][j + 1] + a));
-                if (j + 1 <= high) {
+                if (j + 1 <= high) { // 에어컨 가동시켜서 온도 낮추기
                     dp[i + 1][j] = Math.min(dp[i + 1][j], dp[i][j + 1] + a);
                 }
-                if (j - 1 >= low) {
+                if (j - 1 >= low) { // 에어컨 가동시켜서 온도 높이기
                     dp[i + 1][j] = Math.min(dp[i + 1][j], dp[i][j - 1] + a);
                 }
-                dp[i + 1][j] = Math.min(dp[i + 1][j], dp[i][j] + b);
-                if (j+1 > temperature && j + 1 <= high) {
+                if (j + 1 > temperature && j + 1 <= high) { // 에어컨을 끄고 온도 낮추기
                     dp[i + 1][j] = Math.min(dp[i + 1][j], dp[i][j + 1]);
                 }
-                if (j-1 < temperature && j - 1 >= low) {
+                if (j - 1 < temperature && j - 1 >= low) { // 에어컨을 끄고 온도 높이기
                     dp[i + 1][j] = Math.min(dp[i + 1][j], dp[i][j - 1]);
                 }
-                if (j == temperature){
+                if (j == temperature){ // 온도가 실외온도랑 같은 경우 **
                     dp[i + 1][j] = Math.min(dp[i + 1][j], dp[i][j]);
                 }
             }
         }
         
-        int result = Integer.MAX_VALUE;
-        for(int i = 0; i < 51;i++) {
-            result = Math.min(result, dp[N][i]);
-        }
-        return result;
-        // return Arrays.stream(dp[onboard.length]).min().getAsInt();
+        return Arrays.stream(dp[onboard.length]).min().getAsInt();
     }
 }
