@@ -1,5 +1,16 @@
 import java.util.*;
 
+/*
+[문제풀이]
+1. visit 배열로 watCnt를 사용했다. 
+    wayCnt[i][j][k];
+    i, j : 맵 위치
+    k : 방문한 방향에 대한 index
+2. callX, callY를 사용해서 범위 외의 이동이 대한 케이스를 처리함
+3. 한번 같은 방향으로 방문한 장소는 같은 사이클을 돌기 때문에 다시 계산해야할 필요가 없다.
+
+*/
+
 class Solution {
     
     ArrayList<Integer> list = new ArrayList<>();
@@ -58,7 +69,7 @@ class Solution {
         N = grid.length;
         M = grid[0].length();
         arr = new char[N][];
-        wayCnt = new int[N][M][5];
+        wayCnt = new int[N][M][4];
         
         for(int i = 0; i < N; i++) {
             arr[i] = grid[i].toCharArray();
