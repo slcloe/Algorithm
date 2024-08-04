@@ -24,20 +24,20 @@ public class Main {
         while(!queue.isEmpty()) {
             int[] cur = queue.poll();
 
-            if (cur[0] == 0) { // J
+            if (cur[0] >= 0) { // J
                 for (int i = 0; i < 4; i++) {
                     int tx = dx[i] + cur[1];
                     int ty = dy[i] + cur[2];
 
                     if (tx < 0 || tx >= N || ty < 0 || ty >= M) {
-                        System.out.println(cur[3] + 1);
+                        System.out.println(cur[0] + 1);
                         return;
                     }
                     if (map[tx][ty] == 'F' || map[tx][ty] == '#') continue;
                     if (v[tx][ty]) continue;
 
                     v[tx][ty] = true;
-                    queue.offer(new int[] {0, tx, ty, cur[3] + 1});
+                    queue.offer(new int[] {cur[0] + 1, tx, ty});
                 }
             }
             else { // F
@@ -49,7 +49,7 @@ public class Main {
                     if (map[tx][ty] == 'F' || map[tx][ty] == '#') continue;
 
                     map[tx][ty] = 'F';
-                    queue.offer(new int[]{1, tx, ty, 0});
+                    queue.offer(new int[]{cur[0], tx, ty});
                 }
             }
         }
@@ -72,33 +72,18 @@ public class Main {
         for (int i = 0; i < N; i++) {
             for (int j = 0; j < M; j++) {
                 if (map[i][j] == 'J') {
-                    queue.offerLast(new int[] {0, i, j, 0}); // code, i, j, depth
+                    queue.offerLast(new int[] {0, i, j}); // depth, i, j, depth
                     v[i][j] = true;
                 }
-                if (map[i][j] == 'F') {
-                    queue.offerFirst(new int[] {1, i, j, 0});
-//                    v[i][j] = true;
+                else if (map[i][j] == 'F') {
+                    queue.offerFirst(new int[] {-1, i, j});
                 }
             }
         }
         calEscape();
 
-
-
-
-
-
     }
 
 }
-/*
-4 4
-####
-#JF#
-#.F#
-#..#
-
-
- */
 
 
