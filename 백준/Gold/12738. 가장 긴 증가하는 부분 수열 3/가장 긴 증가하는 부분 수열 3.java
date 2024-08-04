@@ -9,8 +9,8 @@ public class Main {
     static int[] arr;
     static int[] arrb;
     static int MaxSize;
-    static int[] dp;
-    static int[] result;
+//    static int[] dp;
+//    static int[] result;
 
     static int binarySearch(int idx){
         if (arrb[MaxSize] < arr[idx]) { // 지금껏 본 숫자 중 가장 큰 숫자일 때
@@ -37,16 +37,16 @@ public class Main {
 
         arr= new int[N];
         arrb = new int[N];
-        dp = new int[N];
-        result = new int[N];
+//        dp = new int[N];
+//        result = new int[N];
 
         for (int i = 0; i < N; i++) {
             arr[i] = Integer.parseInt(st.nextToken());
         }
         arrb[0] = arr[0];
-        dp[0] = 1;
+//        dp[0] = 1;
         for (int i = 1; i < N; i++) {
-            dp[i] = binarySearch(i); // dp배열에는 각 idx의 최장길이를 구한다.
+            binarySearch(i); // dp배열에는 각 idx의 최장길이를 구한다.
         }
         System.out.println(MaxSize + 1);
 
