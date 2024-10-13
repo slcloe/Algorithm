@@ -34,7 +34,7 @@ public class Main {
 
             // 2 충돌 검사
             if (map[pos[0]][pos[1]] == 'R')
-                return "kraj " + (n);
+                return "kraj " + (i + 1);
 
             // 3 아두이노 이동 및 충돌 검사
             map = new char[N][M];
